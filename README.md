@@ -14,11 +14,10 @@ Implementing this functionality using blockchain is interesting because:
    have their own unique public keys on the blockchain that can be referenced
    by the audit log without revealing the actual users identity or any PHI.
 3. Blockchain is accessible - the audit records can be easily accessed by
-   anonymous
+   anonymous users without revealing any PHI
 
 This prototype uses ethereum for the blockchain implementation and has a
 smart contract that contains an audit log entry (see contracts/auditEntry.sol).  
-The contract
 
 Pre-requisites
 --------------
