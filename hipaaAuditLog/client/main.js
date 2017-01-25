@@ -3,6 +3,9 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
 
+Meteor.subscribe('Patients');
+
+
 Template.patients.helpers({
   patients() {
     return Patients.find();
