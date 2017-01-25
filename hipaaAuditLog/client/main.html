@@ -1,0 +1,21 @@
+<head>
+  <title>hipaaAuditLog</title>
+</head>
+
+<body>
+  <h1>Welcome to Meteor!</h1>
+  {{> loginButtons}}
+  {{> patients}}
+</body>
+
+<template name="patients">
+  <ul>
+  {{#each patients}}
+    {{> patient}}
+  {{/each}}
+</ul>
+</template>
+
+<template name="patient">
+  <li>{{name}} - {{mrn}} - {{publicKey}}</li>
+</template>
