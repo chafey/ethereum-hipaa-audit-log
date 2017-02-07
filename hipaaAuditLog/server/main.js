@@ -11,7 +11,7 @@ console.log(web3.eth.accounts);
 Meteor.startup(() => {
   // code to run on server at startup
 
-  // Add users if they don't exist.  Each user has their ethereum publicKey in
+  // Add users if they don't exist.  Each user has their ethereum ethereumAddress in
   // their profile
   if(Meteor.users.find().count() === 0) {
     console.log('creating users');
@@ -20,18 +20,17 @@ Meteor.startup(() => {
       email : 'test@test.com',
       password : 'test',
       profile : {
-        publicKey: '0x1d8a14344df5b8f96f659c965614f623df83d5e9' // web3.eth.accounts[1]
+        ethereumAddress: '0xFE2b768a23948EDDD7D7Caea55bAa31E39045382' // web3.eth.accounts[1]
       }
     });
   }
 
-  // Add patient if it doesn't already exist.  Each patient has an ethereum
-  // publicKey
+  // Add patient if it doesn't already exist.  Each patient has an ethereumAddress
   if(Patients.find().count() === 0) {
     Patients.insert({
       name: 'JOHN^DOE',
       mrn: '1234',
-      publicKey: '0xa53cfb5697f17b97e36db9eb76faa2d8868f0ecf'
+      ethereumAddress: '0xA9a418dA22532Bd1189fF8Be5Cdaf3570bF9da43'
     });
   }
 });
@@ -47,7 +46,7 @@ Meteor.publish('Patients', function patientsPublication() {
 function addAuditEntry(accessed, accessor) {
   console.log("Adding auditEntry to ethereum");
 
-  web3.personal.unlockAccount(web3.eth.accounts[0], 'changeme');
+  web3.personal.unlockAccount(web3.eth.accounts[0], 'iloveethereum');
   // NOTE: Unlocking an account requires geth to expose the personal API via
   // RPC which is a major security hole.  This is just the most convenient
   // for a prototype - the right way should be to sign the transaction
@@ -80,6 +79,6 @@ Meteor.methods({
     console.log('patientViewed ', patient.mrn);
     // Add an auditEntry contract to ethereum with this user's public key and
     // the patient's public key
-    addAuditEntry(patient.publicKey, Meteor.user().profile.publicKey)
+    addAuditEntry(patient.ethereumAddress, Meteor.user().profile.ethereumAddress)
   }
 })
